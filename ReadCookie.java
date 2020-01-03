@@ -5,24 +5,18 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class EmployeeDetails
+ * Servlet implementation class ReadCookie
  */
-@WebServlet("/EmployeeDetails")
-public class EmployeeDetails extends HttpServlet {
+@WebServlet("/ReadCookie")
+public class ReadCookie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeeDetails() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,23 +24,18 @@ public class EmployeeDetails extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out=response.getWriter();
-		String name=request.getParameter("empname");
-		String email=request.getParameter("mail");
-		String date=request.getParameter("doj");
-		String job=request.getParameter("job");
-		String lang[]=request.getParameterValues("lang");
-		int sal=Integer.parseInt(request.getParameter("salary"));
-		out.println("Employee name :"+ name +"<br>");
-		out.println("Email Id is :"+ email+"<br>");
-		out.println("Date of Joining is :"+ date+"<br>");
-		out.println("Job is :"+ job+"<br>");
-		out.println("Salary is :"+ sal+"<br>");
-		out.print("Languages Known :");
-		for(String s:lang)
-			out.println(" "+s+", ");
+		Cookie cks[]= request.getCookies();
 		
+		for(int i=0;i<cks.length;i++){
+			out.println("Cookie Name= "+cks[i].getName());
+			out.println("Cookie value= "+cks[i].getValue()+"<br>");
+		}
+		HttpSession session=request.getSession();
+		out.println(session.getAttribute("mobile"));
+		session.invalidate();
 	}
-
+		
+		
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EmployeeDetails
+ * Servlet implementation class RequestMethods
  */
-@WebServlet("/EmployeeDetails")
-public class EmployeeDetails extends HttpServlet {
+@WebServlet("/RequestMethods")
+public class RequestMethods extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EmployeeDetails() {
+    public RequestMethods() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +30,16 @@ public class EmployeeDetails extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out=response.getWriter();
-		String name=request.getParameter("empname");
-		String email=request.getParameter("mail");
-		String date=request.getParameter("doj");
-		String job=request.getParameter("job");
-		String lang[]=request.getParameterValues("lang");
-		int sal=Integer.parseInt(request.getParameter("salary"));
-		out.println("Employee name :"+ name +"<br>");
-		out.println("Email Id is :"+ email+"<br>");
-		out.println("Date of Joining is :"+ date+"<br>");
-		out.println("Job is :"+ job+"<br>");
-		out.println("Salary is :"+ sal+"<br>");
-		out.print("Languages Known :");
-		for(String s:lang)
-			out.println(" "+s+", ");
-		
+		out.println(request.getRequestURI()+"<br>");
+		out.println(request.getLocalPort()+"<br>");
+		out.println(request.getServerName()+"<br>");
+		out.println(request.getContentType()+"<br>");
+		out.println(request.getServletPath()+"<br>");
+		out.println(request.getRemoteAddr()+"<br>");
+		out.println(request.getRequestURL()+"<br>");
+		out.println(request.getProtocol()+"<br>");
+		out.println(request.getMethod()+"<br>");
+		out.println(request.getScheme()+"<br>");
 	}
 
 	/**
